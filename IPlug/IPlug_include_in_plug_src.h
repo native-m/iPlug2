@@ -66,6 +66,7 @@
 #endif
 
 #pragma mark - ** Global Functions and Defines **
+extern Plugin* IPlugCreateInstance(const iplug::InstanceInfo& instance_info);
 
 #pragma mark - VST2
 #if defined VST2_API
@@ -135,7 +136,11 @@
   #if defined VST3_API
   static Steinberg::FUnknown* createInstance(void*)
   {
+#if defined PLUG_CMAKE_MODE
+    return (Steinberg::Vst::IAudioProcessor*)IPlugCreateInstance(iplug::InstanceInfo());
+#elif
     return (Steinberg::Vst::IAudioProcessor*) iplug::MakePlug(iplug::InstanceInfo());
+#endif
   }
 
   BEGIN_FACTORY_DEF(PLUG_MFR, PLUG_URL_STR, PLUG_EMAIL_STR)
@@ -284,6 +289,7 @@ BEGIN_IPLUG_NAMESPACE
 #pragma mark -
 #pragma mark VST2, VST3, AAX, AUv3, APP, WAM, WEB
 
+#if !defined PLUG_CMAKE_MODE
 #if defined VST2_API || defined VST3_API || defined AAX_API || defined AUv3_API || defined APP_API  || defined WAM_API || defined WEB_API
 
 Plugin* MakePlug(const iplug::InstanceInfo& info)
@@ -338,6 +344,7 @@ Steinberg::FUnknown* MakeProcessor()
 
 #else
 #error "No API defined!"
+#endif
 #endif
 
 #pragma mark - ** Config Utility **

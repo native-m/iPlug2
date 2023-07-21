@@ -19,7 +19,10 @@
 
 #include <cstdio>
 #include "IPlugPlatform.h"
+
+#ifndef PLUG_CMAKE_MODE
 #include "config.h"
+#endif
 
 #define API_EXT2
 #ifdef VST2_API
@@ -150,10 +153,11 @@ END_IPLUG_NAMESPACE
   #error You need to define PLUG_MFR_ID in config.h - The unique four char ID for your manufacturer, e.g. 'Acme'
 #endif
 
-#ifndef PLUG_CLASS_NAME
+#if !defined PLUG_CMAKE_MODE && defined PLUG_CLASS_NAME
   #error PLUG_CLASS_NAME not defined - this is the name of your main iPlug plug-in class (no spaces allowed)
 #endif
 
+#if !defined OS_WIN
 #ifndef BUNDLE_NAME
   #error BUNDLE_NAME not defined - this is the product name part of the plug-in's bundle ID (used on macOS and iOS)
 #endif
@@ -164,6 +168,7 @@ END_IPLUG_NAMESPACE
 
 #ifndef BUNDLE_DOMAIN
   #error BUNDLE_DOMAIN not defined - this is the domain name part of the plug-in's bundle ID (used on macOS and iOS)
+#endif
 #endif
 
 #ifndef PLUG_CHANNEL_IO
