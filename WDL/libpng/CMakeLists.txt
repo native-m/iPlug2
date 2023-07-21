@@ -1,0 +1,26 @@
+set(LIBPNG_SOURCE
+  "png.c"
+  "png.h"
+  "pngconf.h"
+  "pngdebug.h"
+  "pngerror.c"
+  "pngget.c"
+  "pnginfo.h"
+  "pnglibconf.h.prebuilt"
+  "pngmem.c"
+  "pngpread.c"
+  "pngpriv.h"
+  "pngread.c"
+  "pngrio.c"
+  "pngrtran.c"
+  "pngrutil.c"
+  "pngset.c"
+  "pngstruct.h"
+  "pngtest.c"
+  "pngtrans.c"
+  "pngwio.c"
+  "pngwrite.c"
+  "pngwtran.c"
+  "pngwutil.c")
+
+add_library(libpng-wdl ${LIBPNG_SOURCE})
