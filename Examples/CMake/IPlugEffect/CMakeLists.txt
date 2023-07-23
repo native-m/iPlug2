@@ -26,3 +26,4 @@ iplug_add_target(
   SOURCE            ${IPLUGEFFECT_SOURCE}
   DEFINE            IPLUG_EXAMPLE_RESOURCE_PATH="${IPLUG_EXAMPLE_RESOURCE_PATH}"
 )
+
